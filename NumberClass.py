@@ -5,16 +5,14 @@ from operator import itemgetter, attrgetter
 class NumberClass:
     def __init__(self):
         #Turn into dictionary of the form (word category, list of words within that category
-        self.Feature = []
-        self.weightVector = []
+        self.Feature = [0 for i in range(784)]
+        self.weightVector = np.array([0 for i in range(784)], dtype = float)
         self.count = 0
         self.changed  = 0
-        for i in range(784):
-            self.Feature.append(0)
-            self.weightVector.append(0.5)
     
     def addToFeature(self, adder, positionx, positiony):
         self.Feature[positionx+28*positiony] += adder
+        
     def updateWeightVector(self, adder, positiony, positionx):
         temp = self.Feature[positionx+positiony*28]
         self.weightVector[positionx+positiony*28] += temp*adder 
